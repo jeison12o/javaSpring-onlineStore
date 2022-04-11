@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Proyecto / registroBodega</title>
+<div th:replace="fragment/linksHeader :: links"></div>
+<link rel="stylesheet" th:href="@{/css/registroBodega.css}">
+</head>
+<body style="overflow-x: hidden;">
+
+	<div class="form-group" th:replace="fragment/vendedor/navBar :: nav"></div>
+	<div class="wrap wrap-content">
+		<table id="tablaMain">
+			<tr>
+				<td id="col1Main">
+					<div class="card" id="cardFormulario" style="width: 330px;">
+						<div class="card-body">
+							<form action="#"
+								th:action="@{/guardarBodega/{idVendedor}(idVendedor = ${idVendedor})}"
+								th:object="${bodega}" method="post" id="formulario">
+								<table>
+									<tr>
+										<td colspan="2"><span id="titulo"
+											style="font-size: 30px; font-weight: bold;">Gesti&oacute;n
+												de bodega</span>
+											<hr style="background-color: white;"></td>
+									</tr>
+									<tr>
+										<td colspan="2"><span id="nombre">Nombre </span> <input
+											autofocus placeholder="Nombre" th:field="*{nombre}"
+											required="true" type="text" class="form-control" /> 
+											<span
+											th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+											class="text-danger"></span>
+											<span
+											th:if="@{existeBodega(nombre)}" th:text="${error}"
+											class="text-danger"></span>
+											
+											</td>
+									</tr>
+									<tr>
+										<td colspan="2"><span id="direccion">Direcci&oacute;n</span>
+											<input placeholder="Direcci&oacute;n" th:field="*{direccion}"
+											required="true" type="text" class="form-control" /> <span
+											th:if="${#fields.hasErrors('direccion')}"
+											th:errors="*{direccion}" class="text-danger"></span></td>
+									</tr>
+									<tr>
+										<td colspan="2"><span id="capacidad">Capacidad</span> <input
+											th:field="*{capacidad}" placeholder="capacidad"
+											required="true" type="number" class="form-control" /> <span
+											th:if="${#fields.hasErrors('capacidad')}"
+											th:errors="*{capacidad}" class="text-danger"></span></td>
+									</tr>
+									<tr>
+										<td colspan="2" style="text-align: center;"><button
+												type="submit" class="btn btn-success"
+												style="margin-top: 20px;">Guardar</button></td>
+									</tr>
+								</table>
+							</form>
+						</div>
+					</div>
+				</td>
+				<td id="col2Main">
+					<div class="card" id="cardRegistros">
+						<div class="container" th:if="${listaBodegas.isEmpty()}"
+							style="width: 400px;" id="divNoHayBodegas">
+							<div id="noHayBodegas" class="card">
+								<div class="card-body" style="text-align: center;">
+									<span>No hay bodegas registradas a&uacute;n.</span>
+								</div>
+							</div>
+						</div>
+						<div th:if="${!listaBodegas.isEmpty()}" style="width: 520px;"
+							id="divSiHayBodegas">
+							<div class="card-top">
+								<h1 id="tituloRegistros">Registros</h1>
+							</div>
+							<div class="card-body" id="cardTabla" style="padding: 20px;">
+								<div class="card-content">
+									<table class="table table-primary" id="tablaRegistros">
+										<tr>
+											<td>Nombre</td>
+											<td>Direcci&oacute;n</td>
+											<td>Capacidad</td>
+											<td>Editar</td>
+											<td>Eliminar</td>
+										</tr>
+										<tr th:each="bodega : ${listaBodegas}">
+											<td th:text="${bodega.nombre}"></td>
+											<td th:text="${bodega.direccion}"></td>
+											<td th:text="${bodega.capacidad}" style="text-align: center;"></td>
+											<td><a class="btn btn-info"
+												th:href="@{/editarBodega/{id}(id=${bodega.id})}"
+												style="font-size: 25px; padding: 3px 10px; border-radius: 50%;"><i
+													class="fas fa-pencil-ruler"></i></a></td>
+											<td style="text-align: center;"><a
+												class="btn btn-danger"
+												th:href="@{/eliminarBodega/{id}(id=${bodega.id})}"
+												style="font-size: 25px; padding: 3px 10px; border-radius: 50%;"><i
+													class="fas fa-trash"></i></a></td>
+										</tr>
+									</table>
+									<div id="paginacion">
+										<a
+											th:each="i : ${#numbers.sequence(0,listaBodegas.totalPages-1)}"
+											class="page-link btn btn-primary"
+											th:href="@{'/registroBodega/' + ${usuario.id} + '/pag/' + ${i}}"
+											th:text="${i}" id="pagElement"></a>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<footer style="margin-top: 100px;">
+		<div th:replace="fragment/footer :: footer"></div>
+	</footer>
+</body>
+
+</html>

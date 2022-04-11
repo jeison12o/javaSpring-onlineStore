@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Proyecto / editarProducto</title>
+<div th:replace="fragment/linksHeader :: links"></div>
+<link rel="stylesheet" th:href="@{/css/editarProducto.css}">
+</head>
+<body>
+
+	<div class="form-group" th:replace="fragment/vendedor/navBar :: nav"></div>
+
+	<div th:if="${bodegaConEspacio == false}" id="divErrorBodega">
+		<span class="alert alert-danger">&iexcl;No queda espacio
+			suficiente en la bodega para tal cantidad!</span>
+	</div>
+
+	<form action="#" th:object="${producto}"
+		th:action="@{/modificarProducto/{id}(id=${producto.id})}"
+		method="post" enctype="multipart/form-data">
+		<input type="hidden" id="agregarUrl" th:field="*{urlFoto}"> <input
+			type="hidden" id="cambioUrl" name="cambioUrl" value="false">
+		<table class="card"
+			style="width: 420px; padding: 20px; margin-top: 70px;" align="center">
+			<thead>
+				<tr>
+					<th colspan="2" id="titulo" style="text-align: center;">
+						<h1>Edici&oacute;n de producto</h1>
+						<hr style="background-color: white; width: 373px;">
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Nombre:</td>
+					<td><input autofocus type="text" placeholder="Nombre"
+						th:field="${producto.nombre}" required="true" class="form-control" /><span
+						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+						class="text-danger"></span></td>
+				</tr>
+				<tr>
+					<td><br> <span class="etiqueta">Descripci&oacute;n:</span></td>
+					<td><br> <input autofocus type="text"
+						placeholder="Descripci&oacute;n" required="true"
+						th:field="${producto.descripcion}" class="form-control" /> <span
+						th:if="${#fields.hasErrors('descripcion')}"
+						th:errors="*{descripcion}" class="text-danger"></span></td>
+				</tr>
+				<tr>
+					<td><br>Cantidad:</td>
+					<td><br> <input type="number" placeholder="Cantidad"
+						th:field="${producto.cantidad}" required="true"
+						class="form-control" /><span
+						th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}"
+						class="text-danger"></span></td>
+				</tr>
+				<tr>
+					<td><br>Subcategor&iacute;a:</td>
+					<td><br> <select th:field="*{idSubcategoria}"
+						class="form-control">
+							<option th:each="subcategoria : ${listaSubcategorias}"
+								th:value="${subcategoria.id}" th:text="${subcategoria.nombre}"
+								th:selected="${subcategoria.id == producto.subcategoria.id}"></option>
+					</select></td>
+				</tr>
+				<tr>
+					<td><br> <span class="etiqueta">Bodega:</span></td>
+					<td><br> <select th:field="*{idBodega}"
+						class="form-control">
+							<option th:each="bodega : ${listaBodegas}"
+								th:value="${bodega.id}" th:text="${bodega.nombre}"></option>
+					</select></td>
+				</tr>
+				<tr>
+					<td><br>Proveedor:</td>
+					<td><br> <select th:field="*{idProveedor}"
+						class="form-control">
+							<option th:each="proveedor : ${listaProveedores}"
+								th:text="${proveedor.nombre}" th:value="${proveedor.id}"
+								th:selected="${proveedor.id == producto.proveedor.id}"></option>
+					</select></td>
+				</tr>
+				<tr>
+					<td><br> <span class="etiqueta">Precio:</span></td>
+					<td><br> <input type="number" placeholder="Precio"
+						required="true" th:field="*{precio}" class="form-control"><span
+						th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"
+						class="text-danger"></span></td>
+				</tr>
+				<tr>
+					<td><br> <span class="etiqueta">IVA:</span></td>
+					<td><br> <select th:field="*{IVA}" class="form-control">
+							<option value="false">No</option>
+							<option value="true">S&iacute;</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td><br> <label for="file-upload"
+						class="subir btn btn-info">Cargar imagen <i
+							class="fas fa-cloud-upload-alt"></i>
+					</label></td>
+					<td><br>
+						<div class="form-group ">
+							<input type="file" id="file-upload" accept="image/*"
+								class="form-control-file" style='display: none;' name="file">
+							<div>
+								<img id="imcargar" th:src="${producto.urlFoto}"
+									class="img-fluid rounded mt-2"
+									style='width: 14rem; heigth: auto;'>
+							</div>
+						</div> <span th:if="${#fields.hasErrors('urlFoto')}"
+						th:errors="*{urlFoto}" class="text-danger"></span></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: center"><hr
+							style="background-color: white;">
+						<button id="botonGuardar" type="submit" class="btn btn-success">Guardar
+							cambios</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+
+	<script src="js/subirImagen.js" th:src="@{/js/subirImagen.js}"></script>
+
+	<footer style="margin-top: 100px;">
+		<div th:replace="fragment/footer :: footer"></div>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Mis facturas</title>
+<div th:replace="fragment/linksHeader :: links"></div>
+</head>
+<body style="overflow-x: hidden;">
+
+	<div th:if="${usuario.rol.equals('Vendedor')}">
+		<div th:replace="fragment/vendedor/navBar :: nav"></div>
+	</div>
+
+	<div th:if="${usuario.rol.equals('Cliente')}">
+		<div th:replace="fragment/navBar :: nav"></div>
+	</div>
+
+
+	<div class="container" >
+		<div class="card-top">
+				<h2>Datos de las facturas</h2>
+			</div>
+		<div  th:each="factura : ${listaFacturas}" class="card" >
+			
+			<div class="card-body" th:href="@{'/detalleProducto/' + ${usuario.id} + '/' + ${factura.id}}">
+					<div class="form-group">
+						<label>Valor total de la compra:</label> <input class="form-control" th:value="*{factura.precioTotal}" style="pointer-events: none;">
+					</div>
+					<div class="form-group">
+						<label>Nombre del cliente:</label> <input type="text" class="form-control"
+							 th:value="*{factura.cliente.nombre}" autofocus>
+					</div>
+					<div class="form-group">
+						<label>Id Vendedor</label> <input type="text" class="form-control"
+							th:value="${factura.vendedor.nombre}">
+					</div>
+					<div class="form-group">
+					<a th:href="@{'/detalleFactura/' + ${usuario.id} + '/' + ${factura.id}}" >Ver mas informacion de la compra</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div style="margin-top: 100px;">
+		<footer th:replace="fragment/footer :: footer"></footer>
+	</div>
+
+</body>
+</html>

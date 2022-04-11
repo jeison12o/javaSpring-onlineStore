@@ -1,0 +1,70 @@
+@charset "ISO-8859-1";
+
+#tablaSupremaXD {
+	margin-top: 250px;
+	margin-left: 590px;
+	
+}
+
+#cars {
+	width: 182px;
+	height: 29px;
+}
+
+#login {
+	color: white;
+	font-size: 50px;
+	margin-left: 18px;
+}
+
+#dni {
+	margin-top: 10px;
+}
+
+#ingresar {
+	margin-top: 10px;
+	margin-left: 50px;
+	margin-bottom: 210px;
+}
+
+#registrarse {
+	height: 0px;
+	width: 0px;
+	color: white;
+	background-color: brown;
+	border-color: black;
+	border-radius: 20px;
+	margin-left: 45px;
+	text-decoration: underline;
+}
+
+#registrarse:hover {
+	height: 0px;
+	width: 0px;
+}
+
+#divisionPrincipal{
+	height: 200px;
+	width: 300px;
+	position: fixed;
+}
+
+img{
+	position: fixed;
+	height: 695px;
+	width: 1366px;
+}
+
+body{
+	background-color: black;
+}
+
+#colEnlace{
+	text-align: center;
+	background-color: black;
+}
+
+a{
+	margin-top: 20px;
+	color: yellow;
+}

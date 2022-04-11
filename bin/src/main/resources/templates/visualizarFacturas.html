@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Mis facturas</title>
+<div th:replace="fragment/linksHeader :: links"></div>
+<link rel="stylesheet" th:href="@{/css/visualizarFacturas.css}" />
+</head>
+<body>
+
+	<div class="form-group" th:replace="fragment/navBar :: nav"></div>
+
+	<div class="container mt-4 ml-4 p-4">
+		<h1>
+			<i class="fas fa-file-invoice"></i> Mis facturas
+		</h1>
+		<span>Puedes seleccionar la factura cuyos detalles deseas
+			conocer.</span>
+	</div>
+	<hr style="background-color: white;">
+	<div id="divVacia" class="container mt-4 ml-4 p-4"
+		th:if="${listaFacturas.isEmpty()}">
+		<h2>A&uacute;n no hay facturas a tu nombre, realiza algunas
+			compras.</h2>
+	</div>
+	<div id="divLlena" class="container mt-4 ml-4 p-4"
+		th:if="${!listaFacturas.isEmpty()}" style="width: 100%;">
+		<a th:each="factura : ${listaFacturas}" th:href="@{'/facturaArchivoPlano/' + ${usuario.id} + '/' + ${factura.id}}" style="color: white; text-decoration: underline;">Obtener archivo plano
+			<a class="row btn btn-primary" 
+				style="width: 100%; margin-bottom: 5px;"
+				th:href="@{'/visualizarDetalle/' + ${factura.id}} + '/' + ${usuario.id}">
+				<span class="col-sm" th:text="'ID: ' + ${factura.id}"></span>
+				<span class="col-sm" th:text="'ID pedido: ' + ${factura.pedido.id}"></span>
+				<span class="col-sm" th:text="'Comprador: ' + ${factura.comprador.nombre} + ' ' + ${factura.comprador.apellido}"></span>
+				<span class="col-sm" th:text="'Fecha: ' + ${factura.fecha}"></span> 
+				<span class="col-sm" th:text="'Valor total: $ ' + ${factura.valorTotal} + ' COP'"></span>
+			</a>
+		</a>
+		<div id="paginacion" th:if="${!listaFacturas.isEmpty()}">
+			<a th:each="i : ${#numbers.sequence(0,listaFacturas.totalPages-1)}"
+				class="page-link btn btn-primary"
+				th:href="@{'/visualizarFacturas/' + ${usuario.id} + '/page/' + ${i}}"
+				th:text="${i}" id="pagElement" align="center"></a>
+		</div>
+	</div>
+
+	<footer style="margin-top: 300px;" th:if="${!listaFacturas.isEmpty()}">
+		<div th:replace="fragment/footer :: footer"></div>
+	</footer>
+	<footer style="margin-top: 320px;" th:if="${listaFacturas.isEmpty()}">
+		<div th:replace="fragment/footer :: footer"></div>
+	</footer>
+
+</body>
+</html>

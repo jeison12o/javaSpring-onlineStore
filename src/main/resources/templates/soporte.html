@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Proyecto / soporte</title>
+<div th:replace="fragment/linksHeader :: links"></div>
+<link rel="stylesheet" th:href="@{/css/soporte.css}" />
+</head>
+<body background="/images/fondos/soporte.jpg">
+	
+	<div id="divisionPrincipal" align="center">
+		<table align="center">
+			<tr><td colspan="2" id="columnaTitulo"><span>Soporte</span></td></tr>
+			<tr id="filaDec"><td colspan="2" id="columnaDescripcion"><span id="descripcionGeneral">Espacio llevado a cabo con la intenci&oacute;n de que puedas enviar solicitudes,<br>sugerencias, quejas y reclamos 
+			al soporte de la p&aacute;gina, recuerda tener un<br>perfil creado.</span></div></td></tr>
+			<tr><td colspan="2"><div id="divEsp1"></td></tr>
+			<tr><td class="colDatos"><span id="palabraDNI">Correo:</span></td><td class="colDatos"><input type="email" required="true" placeholder="DNI" /></td></tr>
+			<tr><td><div id="divEsp2"></div></td></tr>
+			<tr><td class="colDatos"><span id="palabraTema">Tema:</span></td><td class="colDatos"><input type="text" required="true" placeholder="Tema" /></td></tr>
+			<tr><td><div id="divEsp3"></div></td></tr>
+			<tr id="filaDatos"><td class="colDatos" id="colDescripcion"><span id="palabraDescripcion">Descripci&oacute;n:</span></td><td class="colDatos"><textarea placeholder="Ingresa tu situaci&oacute;n lo m&aacute;s espec&iacute;fica posible..."></textarea></td></tr>
+			<tr><td colspan="2"><div id="divEsp4"></div></td></tr>
+			<tr><td colspan="2" class="colDatos" id="colBoton"><button>Enviar</button></td></tr>
+		</table>
+	</div>
+	
+</body>
+</html>

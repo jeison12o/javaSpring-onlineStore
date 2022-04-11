@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Proyecto / editarProveedor</title>
+<div th:replace="fragment/linksHeader :: links"></div>
+<link rel="stylesheet" th:href="@{/css/editarProveedor.css}">
+</head>
+<body>
+	<div class="form-group" th:replace="fragment/vendedor/navBar :: nav"></div>
+	<div>
+		<div id="divisionFormulario" align="center">
+			<div class="card" id="cardPrincipal"
+				style="width: 330px; padding: 10px;">
+				<div class="card-top">
+					<h2>Edici&oacute;n de proveedor</h2>
+					<hr style="background-color: white;">
+				</div>
+				<div>
+					<form action="#"
+						th:action="@{/modificarProveedor/{id}(id=${proveedor.id})}"
+						th:object="${proveedor}" method="post">
+						<table align="center">
+							<tbody>
+								<tr>
+									<td><span>Nombre</span><input autofocus
+										th:field="*{nombre}" required="true" type="text"
+										placeholder="Nombre" class="form-control" /> <span
+										th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+										class="text-danger"></span> <span th:text="${error}"
+										class="text-danger"></span></td>
+								</tr>
+								<tr>
+									<td><div id="divEsp1"></div></td>
+								</tr>
+								<tr>
+									<td><span>Descripci&oacute;n</span><input
+										th:field="*{descripcion}" required="true" type="text"
+										placeholder="Descripci&oacute;n" class="form-control" /><span
+										th:if="${#fields.hasErrors('descripcion')}"
+										th:errors="*{descripcion}" class="text-danger"></span></td>
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align: center;">
+										<button type="submit" id="botonGuardar"
+											class="btn btn-success" style="margin-top: 20px;">Guardar</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</body>
+<footer style="margin-top: 300px;">
+
+	<div th:replace="fragment/footer :: footer"></div>
+</footer>
+</html>

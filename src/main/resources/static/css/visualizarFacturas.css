@@ -1,0 +1,19 @@
+@charset "ISO-8859-1";
+
+body{
+	/*background: linear-gradient(to bottom, #fcdab7, #1e5f74 , #133b5c, #1d2d50, black);*/
+	background: url('../images/fondos/fondoDark.jpg');
+	overflow-x: hidden;
+}
+
+#paginacion{
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+}
+
+#pagElement{
+	display: block;
+	float: left;
+}
+

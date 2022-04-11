@@ -1,0 +1,78 @@
+@charset "ISO-8859-1";
+
+body{
+	/*background: linear-gradient(to bottom, #fcdab7, #1e5f74 , #133b5c, #1d2d50, black);*/
+	background: url('../images/fondos/fondoDark.jpg');
+	overflow-x: hidden;
+}
+
+.containerx{
+	display: inline-block;
+	width: 100%;
+	padding-left: 50px;
+}
+
+#divTitulo{
+	padding-top: 20px;
+}
+
+#titulo{
+	font-size: 50px;
+}
+
+#pedido{
+	display: block;
+	float: left;
+	width: auto;
+	margin: 10px;
+	margin-bottom: 60px;
+}
+
+#tarjeta{
+	height: 200px;
+	width: 205px;
+	background-color: #efefef;
+	margin-left: 65px;
+	margin-top: 40px;
+	transition: 0.5s;
+	color: black;
+	padding: 5px;
+	padding-left: 20px;
+	padding-top: 10px;
+	font-size: 12px;
+}
+
+#caja{
+	border: 1px solid white;
+	width: 200px;
+}
+
+#imgCaja{
+	height: 350px;
+	width: 350px;
+	margin-top: -240px;
+	transition: 0.5s;
+	position: absolute;
+}
+
+#imgCaja:hover{
+	transform: translateY(50px);
+}
+
+footer{
+	width: 100%;
+	margin-top: -45px;
+}
+
+#paginacion{
+	margin-top: 40px;
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+}
+
+#pagElement{
+	display: block;
+	float: left;
+}
+

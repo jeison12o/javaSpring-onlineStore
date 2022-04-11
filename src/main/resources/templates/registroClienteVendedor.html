@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Proyecto / registroClienteVendedor</title>
+<div th:replace="fragment/linksHeader :: links"></div>
+<link rel="stylesheet" th:href="@{/css/registroClienteVendedor.css}" />
+</head>
+<body background="/images/fondos/indice.jpg">
+	<table align="center">
+		<tr><td>
+			<form th:action="@{/registroCliente}">
+			<button id="botonCliente" class="animate__animated animate__fadeInLeft" type="submit">
+				<span>Cliente  <img id="imagenCliente" class="imagen" src="/images/iconos/cliente.png"></span>
+			</button>
+			</form>
+		</td></tr>
+		<tr><td>
+			<form th:action="@{/registroVendedor}">
+			<button id="botonVendedor" class="animate__animated animate__fadeInRight" type="submit">
+				<span>Vendedor  <img id="imagenVendedor" class="imagen" src="/images/iconos/vendedor.png"></span>
+			</button>
+			</form>
+		</td></tr>
+	</table>
+</body>
+</html>

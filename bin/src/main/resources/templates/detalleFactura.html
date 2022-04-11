@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Detalle factura</title>
+<div th:replace="fragment/linksHeader :: links"></div>
+<link rel="stylesheet" th:href="@{/css/detalleFacturas.css}" />
+</head>
+<body>
+
+	<div class="form-group" th:replace="fragment/navBar :: nav"></div>
+
+	<div class="container ml-4 p-3" id="containerTitulo">
+		<h1>Detalle de factura</h1>
+		<span th:text="'Factura id: ' + ${factura.id}"></span>
+	</div>
+	<hr style="background-color: white;">
+	<div class="card-columns" id="containerProductos">
+		<div class="card" th:each="detalle : ${listaDetalles}" id="producto">
+			<img class="card-img-top" th:src="${detalle.producto.urlFoto}">
+			<div class="card-body">
+				<span th:text="${detalle.producto.nombre}"
+					style="font-weight: bolder;"></span><br> <span
+					th:text="'Vendido por: ' + ${detalle.vendedor.nombre} + ' ' + ${detalle.vendedor.apellido}"></span><br>
+				<span th:text="'Cantidad: ' + ${detalle.cantidad}"></span><br>
+				<span th:text="'Fecha: ' + ${detalle.fecha}"></span><br> <span
+					th:text="'$ ' + ${detalle.valor} + ' COP'"></span>
+			</div>
+		</div>
+		<div id="paginacion" th:if="${!listaDetalles.isEmpty()}">
+			<a th:each="i : ${#numbers.sequence(0,listaDetalles.totalPages-1)}"
+				class="page-link btn btn-primary"
+				th:href="@{'/visualizarDetalle/' + ${factura.id} + '/' + ${usuario.id} + '/' + ${i}}"
+				th:text="${i}" id="pagElement" align="center"></a>
+		</div>
+	</div>
+
+	<footer th:if="${!listaDetalles.isEmpty()}">
+		<div style="height: 100px; backgroud-color: black;"></div>
+		<div th:replace="fragment/footer :: footer"></div>
+	</footer>
+	<footer th:if="${listaDetalles.isEmpty()}" style="margin-top: 300px;">
+		<div style="height: 100px; backgroud-color: black;"></div>
+		<div th:replace="fragment/footer :: footer"></div>
+	</footer>
+
+</body>
+</html>

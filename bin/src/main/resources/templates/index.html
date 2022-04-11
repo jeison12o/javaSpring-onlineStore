@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Proyecto</title>
+<div th:replace="fragment/linksHeader :: links"></div>
+<link rel="stylesheet" th:href="@{/css/indice.css}" />
+</head>
+<body style="overflow-x: hidden; overflow-y: hidden">
+
+	<div th:if="${usuarioRegistrado}" style="margin-left: 500px;">
+		<div
+			class="alert alert-success animate__animated animate__slideInDown"
+			role="alert" style="position: absolute;">¡Has sido registrado
+			exit&oacute;samente!</div>
+	</div>
+	<div>
+
+		<img src="/images/fondos/indice.jpg">
+
+		<table align="center">
+			<tr>
+				<td><form th:action="@{/registroClienteVendedor}">
+						<button type="submit" id="division1"
+							class="division animate__animated animate__backInRight animate__delay-0.5s">
+							<span>Registrarse</span>
+						</button>
+					</form></td>
+				<td><form th:action="@{/QuedateEnCasa}">
+						<button type="submit"
+							class="division animate__animated animate__backInUp animate__delay-0.5s"
+							id="division2">
+					</form> <span>COVID y nosotros</span>
+					</button></td>
+			</tr>
+			<tr>
+				<td><form th:action="@{/soporte}">
+						<button
+							class="division animate__animated animate__backInDown animate__delay-0.5s"
+							id="division3">
+							<span>Soporte</span>
+						</button>
+					</form></td>
+				<td><form th:action="@{/signup}">
+						<button
+							class="division animate__animated animate__backInLeft animate__delay-0.5s"
+							id="division4">
+							<span>Ingresar</span>
+						</button>
+					</form></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

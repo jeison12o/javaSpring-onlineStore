@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Proyecto / login</title>
+<div th:replace="fragment/linksHeader :: links"></div>
+<link rel="stylesheet" th:href="@{/css/login.css}" />
+
+</head>
+<body class="animate__animated animate__fadeIn animate__fast"
+	style="overflow-x: hidden; overflow-y: hidden">
+	<!-- background="/images/fondos/login.jpg" -->
+	<div>
+		<img src="/images/fondos/login.jpg">
+
+		<div th:if="${noEncontrado == true}" style="margin-left: 540px;">
+			<div
+				class="alert alert-danger animate__animated animate__slideInDown"
+				role="alert" style="position: absolute;">
+				<i class="fas fa-exclamation-triangle"></i> No se ha encontrado el
+				usuario.
+			</div>
+		</div>
+
+		<div th:if="${errorContrasena == true}" style="margin-left: 540px;">
+			<div
+				class="alert alert-danger animate__animated animate__slideInDown"
+				role="alert" style="position: absolute;">
+				<i class="fas fa-exclamation-triangle"></i> Contrase&ntilde;a
+				incorrecta.
+			</div>
+		</div>
+
+		<div id="divisionPrincipal">
+			<table id="tablaSupremaXD">
+				<thead>
+					<tr>
+						<th>
+							<h1 id="login">LOGIN</h1>
+						</th>
+					<tr>
+						<th>
+							<div th:if="${param.error}" class="alert alert-danger"
+								role="alert">Correo y contrasena invalidos.
+						</th>
+					</tr>
+					</div>
+					<tr>
+						<th>
+							<div id="dni" th:if="${param.logout}" class="alert alert-success"
+								role="alert">Se ha cerrado la sesion.</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<form th:action="@{/login}" method="post">
+					<tr>
+						<td><input type="email" placeholder="Ingresar correo"
+							id="dni" required="true" name="correo"> <span
+							th:text=${correoVacio} class="text-danger"
+							style="background-color: white; font-size: 19 px"></span></td>
+					</tr>
+					<tr>
+						<td><input type="password"
+							placeholder="Ingresar contrase&ntilde;a" id="dni" required="true"
+							name="contrasena"> <span th:text=${contrasenaVacia}
+							class="text-danger"
+							style="background-color: white; font-size: 19px;"></span></td>
+					</tr>
+					<tr>
+						<td id="colEnlace">
+							<a th:href="@{/registroClienteVendedor}" id="enlace">&iquest;No tienes cuenta?, reg&iacute;strate aqu&iacute;</a>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button type="submit" class="btn btn-warning" id="ingresar">Ingresar</button>
+						</td>
+					</tr>
+					</form>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

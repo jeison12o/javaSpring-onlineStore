@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Proyecto / registroProducto</title>
+<div th:replace="fragment/linksHeader :: links"></div>
+<link rel="stylesheet" th:href="@{/css/registroProducto.css}">
+</head>
+<body style="overflow-x: hiden">
+
+	<div class="form-group" th:replace="fragment/vendedor/navBar :: nav"></div>
+
+	<div th:if="${bodegaConEspacio == false}" id="divErrorBodega">
+		<span class="alert alert-danger">&iexcl;No queda espacio
+			suficiente en la bodega para tal cantidad!</span>
+	</div>
+
+	<div>
+		<table id="tablaPrincipal">
+			<tr>
+				<td>
+					<div id="divisionPrincipal" class="card"
+						style="padding: 20px; margin-top: 100px; margin-left: 130px;">
+						<form action="#" th:object="${producto}"
+							th:action="@{/guardarProducto/{idVendedor}(idVendedor = ${idVendedor})}"
+							method="post" enctype="multipart/form-data">
+							<input type="hidden" id="agregarUrl" th:field="*{urlFoto}">
+							<input type="hidden" id="cambioUrl" name="cambioUrl"
+								value="false">
+							<table id="tablaFormulario" align="center">
+								<thead>
+									<tr>
+										<th colspan="2" id="tituloCategoria"><h1>Gesti&oacute;n
+												de productos</h1>
+											<hr style="background-color: white;"> <br></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><span class="etiqueta">Nombre:</span></td>
+										<td><input class="form-control" autofocus type="text"
+											placeholder="Nombre" required="true" th:field="*{nombre}" />
+											<span th:if="${#fields.hasErrors('nombre')}"
+											th:errors="*{nombre}" class="text-danger"></span></td>
+									</tr>
+									<tr>
+										<td><br> <span class="etiqueta">Descripci&oacute;n:</span></td>
+										<td><br> <input class="form-control" autofocus
+											type="text" placeholder="Descripci&oacute;n" required="true"
+											th:field="*{descripcion}" /> <span
+											th:if="${#fields.hasErrors('descripcion')}"
+											th:errors="*{descripcion}" class="text-danger"></span></td>
+									</tr>
+									<tr>
+										<td><br> <span class="etiqueta">Cantidad:</span></td>
+										<td><br> <input class="form-control" type="number"
+											placeholder="Cantidad" required="true" th:field="*{cantidad}" /><span
+											th:if="${#fields.hasErrors('cantidad')}"
+											th:errors="*{cantidad}" class="text-danger"></span></td>
+									</tr>
+									<tr>
+										<td><br> <span class="etiqueta">Subcategor&iacute;a:</span></td>
+										<td><br> <select class="form-control"
+											th:field="*{idSubcategoria}">
+												<option th:each="subcategoria : ${listaSubcategorias}"
+													th:value="${subcategoria.id}"
+													th:text="${subcategoria.nombre}"></option>
+										</select></td>
+									</tr>
+									<tr>
+										<td><br> <span class="etiqueta">Bodega:</span></td>
+										<td><br> <select class="form-control"
+											th:field="*{idBodega}">
+												<option th:each="bodega : ${listaBodegas}"
+													th:value="${bodega.id}" th:text="${bodega.nombre}"></option>
+										</select></td>
+									</tr>
+									<tr>
+										<td><br> <span class="etiqueta">Proveedor:</span></td>
+										<td><br> <select class="form-control"
+											th:field="*{idProveedor}">
+												<option th:each="proveedor : ${listaProveedores}"
+													th:value="${proveedor.id}" th:text="${proveedor.nombre}"></option>
+										</select></td>
+									</tr>
+									<tr>
+										<td><br> <span class="etiqueta">Precio:</span></td>
+										<td><br> <input class="form-control" type="number"
+											placeholder="Precio" required="true" th:field="*{precio}"><span
+											th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"
+											class="text-danger"></span></td>
+									</tr>
+									<tr>
+										<td><br> <span class="etiqueta">IVA:</span></td>
+										<td><br> <select th:field="*{IVA}"
+											class="form-control">
+												<option value="false">No</option>
+												<option value="true">S&iacute;</option>
+										</select></td>
+									</tr>
+									<tr>
+										<td><br> <label for="file-upload"
+											class="subir btn btn-info">Cargar imagen <i
+												class="fas fa-cloud-upload-alt"></i>
+										</label></td>
+										<td><br>
+											<div class="form-group ">
+												<input type="file" id="file-upload" accept="image/*"
+													class="form-control-file" style='display: none;'
+													name="file">
+												<div>
+													<img id="imcargar" src="/images/sinfoto.jpg"
+														class="img-fluid rounded mt-2"
+														style='width: 14rem; heigth: auto;'>
+												</div>
+
+											</div> <span th:if="${#fields.hasErrors('urlFoto')}"
+											th:errors="*{urlFoto}" class="text-danger"></span></td>
+									</tr>
+									<tr>
+										<td colspan="2" style="text-align: center;">
+											<hr style="background-color: white;">
+											<button class="btn btn-success" type="submit"
+												id="botonGuardar">Guardar</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+					</div>
+				</td>
+
+				<td style="text-align: center;">
+					<div id="divisionNoHayProductos"
+						th:if="${listaProductos.isEmpty()}" class="card"
+						style="padding: 20px; margin-left: 100px;">
+						<span id="mensajeNoHayProductos" style="font-size: 20px;">A&uacute;n
+							no hay productos registrados. :(</span>
+					</div>
+
+					<div id="divisionSiHayProductos"
+						th:if="${!listaProductos.isEmpty()}" class="card"
+						style="padding: 20px; margin-left: 100px;">
+						<table align="center" class="table table-primary">
+							<thead>
+								<tr>
+									<th colspan="6" style="text-align: center;">
+										<h1>Registros</h1>
+									</th>
+								</tr>
+								<tr class="filaProductos">
+									<th class="columnaProductos">Nombre</th>
+									<th class="columnaProductos">Cantidad</th>
+									<th class="columnaProductos">Categor&iacute;a</th>
+									<th class="columnaProductos">Proveedor</th>
+									<th class="columnaProductos">Editar</th>
+									<th class="columnaProductos">Eliminar</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="producto : ${listaProductos}" class="filaProductos">
+									<td th:text="${producto.nombre}" class="columnaProductos"></td>
+									<td style="text-align: center;" th:text="${producto.cantidad}"
+										class="columnaProductos"></td>
+									<td style="text-align: center;"
+										th:text="${producto.subcategoria.nombre}"
+										class="columnaProductos"></td>
+									<td style="text-align: center;"
+										th:text="${producto.proveedor.nombre}"
+										class="columnaProductos"></td>
+									<td style="text-align: center;" class="columnaProductos"><a
+										class="btn btn-info"
+										th:href="@{/editarProducto/{id}(id=${producto.id})}"
+										style="font-size: 25px; padding: 3px 10px; border-radius: 50%;">
+											<i class="fas fa-pencil-ruler"></i>
+									</a></td>
+									<td style="text-align: center;" class="columnaProductos"><a
+										class="btn btn-danger"
+										th:href="@{/eliminarProducto/{id}(id=${producto.id})}"
+										style="font-size: 25px; padding: 3px 10px; border-radius: 50%;">
+											<i class="fas fa-trash"></i>
+									</a></td>
+								</tr>
+							</tbody>
+						</table>
+						<div id="paginacion">
+							<a
+								th:each="i : ${#numbers.sequence(0,listaProductos.totalPages-1)}"
+								class="page-link btn btn-primary"
+								th:href="@{'/registroProducto/' + ${usuario.id} + '/pag/' + ${i}}"
+								th:text="${i}" id="pagElement" align="center"></a>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+		<div id="footer"></div>
+	</div>
+	<script src="js/subirImagen.js" th:src="@{/js/subirImagen.js}"></script>
+</body>
+<footer>
+	<div style="height: 150px; background-color: black;"></div>
+	<div th:replace="fragment/footer :: footer"></div>
+</footer>
+</html>

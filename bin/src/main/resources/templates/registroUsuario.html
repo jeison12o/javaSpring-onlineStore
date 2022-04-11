@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Proyecto / registroUsuario</title>
+<div th:replace="fragment/linksHeader :: links"></div>
+<link rel="stylesheet" th:href="@{/css/registroUsuario.css}" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+</head>
+<body class="animate__animated animate__fadeIn">
+	<div class="m-3" align="center">
+		<div class="card" style="width: 32rem;">
+			<div class="card-body">
+				<h5 class="card-title" th:if="${usuario.rol.equals('Cliente')}">Registro
+					de cliente</h5>
+				<h5 class="card-title" th:if="${usuario.rol.equals('Vendedor')}">Registro
+					de vendedor</h5>
+				<form action="#" th:object="${usuario}"
+					th:action="@{/guardarUsuario}" method="post"
+					enctype="multipart/form-data">
+					<input type="hidden" id="agregarUrl" th:field="*{urlFoto}">
+					<span th:if="${#fields.hasErrors('urlFoto')}"
+						th:errors="*{urlFoto}" class="text-danger"></span> <input
+						type="hidden" id="cambioUrl" name="cambioUrl" value="false">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="file-upload" class="btn btn-secondary">Cargar
+										imagen <i class="fas fa-cloud-upload-alt"> </i>
+									</label> <input type="file" id="file-upload" accept="image/*"
+										class="form-control-file" style='display: none;' name="file">
+									<div>
+										<img id="imcargar" src="/images/sinfoto.jpg"
+											class="img-fluid rounded mt-2"
+											style='width: 14rem; heigth: auto;'>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="dni">DNI:</label><input type="number"
+										class="form-control" placeholder="DNI" required="true"
+										th:field="*{DNI}" /> <span
+										th:if="${#fields.hasErrors('DNI')}" th:errors="*{DNI}"
+										class="text-danger"></span> <span
+										th:if="@{existeUnUsuario(DNI)}" th:text="${error}"
+										class="text-danger"></span>
+								</div>
+								<div class="form-group">
+									<label for="nombre">NOMBRE:</label> <input type="text"
+										class="form-control" placeholder="Nombre" required="true"
+										th:field="*{nombre}" /><span
+										th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+										class="text-danger"></span>
+								</div>
+								<div class="form-group">
+									<label for="apellidos">APELLIDOS:</label> <input type="text"
+										class="form-control" placeholder="Apellido" required="true"
+										th:field="*{apellido}" /><span
+										th:if="${#fields.hasErrors('apellido')}"
+										th:errors="*{apellido}" class="text-danger"></span>
+								</div>
+								<div class="form-group">
+									<label for="telefono">Tel&eacute;fono:</label> <input
+										type="number" class="form-control"
+										placeholder="Tel&eacute;fono" required="true"
+										th:field="*{telefono}" /> <span
+										th:if="${#fields.hasErrors('telefono')}"
+										th:errors="*{telefono}" class="text-danger"></span>
+								</div>
+								<div class="form-group">
+									<label for="direccion">Direcci&oacute;n:</label> <input
+										type="text" class="form-control"
+										placeholder="Direcci&oacute;n" required="true"
+										th:field="*{direccion}" /><span
+										th:if="${#fields.hasErrors('direccion')}"
+										th:errors="*{direccion}" class="text-danger"></span>
+								</div>
+								<div class="form-group">
+									<label for="correo">CORREO:</label> <input type="email"
+										class="form-control" placeholder="Correo" required="true"
+										th:field="*{correo}" /><span
+										th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"
+										class="text-danger"></span>
+								</div>
+								<div class="form-group">
+									<label for="correo">CONTRASE&Ntilde;A:</label> <input type="password"
+										class="form-control" placeholder="Contrase&ntilde;a" required="true"
+										th:field="*{contrasena}" /><span
+										th:if="${#fields.hasErrors('contrasena')}" th:errors="*{contrasena}"
+										class="text-danger"></span>
+								</div>
+								<div class="form-group"
+									th:if="${usuario.rol.equals('Vendedor')}">
+									<label for="codigo">C&oacute;digo:</label> <input type="text"
+										class="form-control" placeholder="C&oacute;digo"
+										required="true" th:field="*{codigoEmpresa}" /><span
+										th:if="${#fields.hasErrors('codigoEmpresa')}"
+										th:errors="*{codigoEmpresa}" class="text-danger"></span>
+									<div th:if="${errorCodigo == true}" id="errorCodigo"
+										class="animate__animated animate__bounceInLeft">
+										<span class="text-danger">Solicite un c&oacute;digo
+											valido en Recursos Humanos</span>
+									</div>
+								</div>
+								<button id="validar" class="btn btn-primary" type="submit">Validar</button>
+
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="js/subirImagen.js" th:src="@{/js/subirImagen.js}"></script>
+</body>
+</html>

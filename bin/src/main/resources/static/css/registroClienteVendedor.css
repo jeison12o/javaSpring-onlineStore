@@ -1,0 +1,48 @@
+@charset "ISO-8859-1";
+
+.imagen {
+	height: 100px;
+	width: 90px;
+}
+
+button{
+	width: 400px;
+	height: 150px;
+	border-radius: 10px;
+	border: 2px solid lightgray;
+	text-align: center;
+}
+
+button:hover{
+	width: 404px;
+	height: 154px;
+	filter: brightness(0.9);
+}
+
+table{
+	margin-top: 180px;
+}
+
+td, tr{
+	width: 410px;
+	height: 160px;
+}
+
+span{
+	font-size: 40px;
+	font-family: cursive;
+}
+
+
+#botonCliente{
+	background: linear-gradient(to right, #f0ece3, #d3c09a);
+}
+
+#botonVendedor{
+	background: linear-gradient(to right, #dfd3c3, #c7b198);
+}
+
+
+
+
+

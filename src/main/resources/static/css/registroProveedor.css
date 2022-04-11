@@ -1,0 +1,35 @@
+body {
+	/*background: linear-gradient(to bottom, #fcdab7, #1e5f74 , #133b5c, #1d2d50, black);*/
+	background: url('../images/fondos/fondoDark.jpg');
+	overflow-x: hidden;
+}
+
+#divisionFormulario {
+	padding: 10px;
+}
+
+#botonGuardar {
+	margin-top: 20px;
+}
+
+#divisionFormulario {
+	margin-left: 280px;
+	margin-top: 130px;
+}
+
+#divRegistros {
+	margin-left: 100px;
+	margin-top: 130px;
+	height: 340px;
+}
+
+#paginacion {
+	display: inline-block;
+	width: 200px;
+	text-align: center;
+}
+
+#pagElement {
+	display: block;
+	float: left;
+}

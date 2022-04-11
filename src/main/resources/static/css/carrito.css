@@ -1,0 +1,116 @@
+@charset "ISO-8859-1";
+
+body{
+	/*background: linear-gradient(to bottom, #fcdab7, #1e5f74 , #133b5c, #1d2d50, black);*/
+	background: url('../images/fondos/darkWallBiggest.png');
+	overflow-x: hidden;
+}
+
+.container{
+	display: inline-block;
+}
+
+.containerx{
+	display: inline-block;
+	margin-top: 30px;
+	width: 1270px;
+}
+
+.containerxd{
+	display: inline-block;
+	width: 1340px;
+}
+
+#informacion{
+	display: block;
+	float: left;
+}
+
+#divBotonComprar{
+	display: block;
+	float: left;
+}
+
+#divProductos{
+	margin-left: 20px;
+}
+
+#producto{
+	display: block;
+	float: left;
+	padding: 20px;
+	margin: 5px;
+	width: 250px;
+	transition: 200ms;
+	height: 400px;
+}
+
+#producto:hover{
+	transform: scale(1.05, 1.05);
+}
+
+#titulo{
+	margin-left: 50px;
+	font-size: 30px;
+}
+
+#cuerpoCard{
+	text-align: center;
+}
+
+#informacion{
+	padding: 20px;
+}
+
+#divBotonComprar{
+	float: right;
+	margin-top: 40px;
+	margin-rigth: 80px;
+}
+
+#totalPago{
+	margin-left: 55px;
+	text-decoration: underline;
+}
+
+#divNoProductos{
+	width: auto;
+	height: auto;
+	font-size: 30px;
+	text-align: center;
+	margin-bottom: 400px;
+}
+
+#compraRealizada{
+	text-align: center;
+	animation: bajar 0.5s;
+	position: absolute;
+	width: 100%;
+}
+
+#noHayProductos{
+	text-align: center;
+	animation: bajar 0.5s;
+	position: absolute;
+	width: 100%;
+}
+
+#productoAgotado{
+	text-align: center;
+	animation: bajar 0.5s;
+	position: absolute;
+	width: 100%;
+}
+
+.newText{
+	font-size: 14px;
+}
+
+
+@keyframes bajar{
+	0%{
+		opacity: 0;
+	}100%{
+		opacity: 1;
+	}
+}

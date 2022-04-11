@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Archivo plano | factura</title>
+<div th:replace="fragment/linksHeader :: links"></div>
+<!--<link rel="stylesheet" th:href="@{/css/FacturaArchivoPlano.css}" />-->
+</head>
+<body>
+	<div class="container pt-5">
+		<div class="row">
+			<div class="col" style="text-align: center;">
+				<span
+					style="font-size: 64px; font-weight: bold; margin-left: 10px; margin-top: 100px;"><img
+					src="/images/iconos/ge.png" style="height: 128px; width: 128px;">
+					Empresa de facturaci&oacute;n gE</span>
+			</div>
+		</div>
+		<hr style="background-color: black; margin-top: 30px;">
+		<hr style="background-color: black; margin-bottom: 30px;">
+		<span style="font-size: 30px;">Factura n&uacute;mero: <span
+			id="titulo" class="campoNegrilla" th:text="${factura.id}"></span></span>
+		<hr style="background-color: black; margin-top: 30px;">
+		<hr style="background-color: black; margin-bottom: 30px;">
+
+		<div class="row">
+			<div class="col">
+				<span style="font-size: 30px;">Comprador: <span
+					class="campoCargado"
+					th:text=" ${comprador.nombre} + ' ' + ${comprador.apellido}"></span></span>
+			</div>
+			<div class="col" style="text-align: right;">
+				<span style="font-size: 30px;">Fecha de compra: <span
+					class="campoCargado" th:text="${factura.fecha}"></span>
+			</div>
+		</div>
+		<hr style="background-color: black; margin-top: 30px;">
+		<hr style="background-color: black; margin-bottom: 30px;">
+
+		<div class="row">
+			<div class="col" style="text-align: right;">
+				<span style="font-size: 32px; font-weight: bold;">Total: <span
+					class="campoCargado" th:text="${factura.valorTotal} + ' COP'"></span></span>
+			</div>
+		</div>
+
+		<hr style="background-color: black; margin-top: 30px;">
+		<hr style="background-color: black; margin-bottom: 90px;">
+
+		<div class="row">
+			<div class="col" style="text-align: center;">
+				<span style="font-size: 60px; font-weight: bold;">Productos</span>
+			</div>
+		</div>
+
+		<hr style="background-color: black; margin-top: 30px;">
+		<hr style="background-color: black; margin-bottom: 30px;">
+
+		<div th:each="detalle : ${listaDetalles}">
+			<div class="row">
+				<div class="col">
+					<span style="font-size: 32px; font-weight: bold;">Producto:</span>
+				</div>
+				<div class="col">
+					<span style="font-size: 32px; font-weight: bold;" class="campoCargado"
+						th:text="${detalle.producto.nombre}"></span>
+				</div>
+			</div>
+			<hr style="background-color: black; margin-top: 30px;">
+			<div class="row">
+				<div class="col">
+					<span style="font-size: 32px;">Cantidad:</span>
+				</div>
+				<div class="col">
+					<span style="font-size: 32px;" class="campoCargado"
+						th:text="${detalle.cantidad}"></span>
+				</div>
+			</div>
+			<hr style="background-color: black; margin-top: 30px;">
+			<div class="row">
+				<div class="col">
+					<span style="font-size: 32px;">Comprado por:</span>
+				</div>
+				<div class="col">
+					<span style="font-size: 32px;" class="campoCargado"
+						th:text="${detalle.valor} + ' COP'"></span>
+				</div>
+			</div>
+			<hr style="background-color: black; margin-top: 30px;">
+			<div class="row">
+				<div class="col">
+					<span style="font-size: 32px;">Precio con IVA:</span>
+				</div>
+				<div class="col">
+					<span style="font-size: 32px;" class="campoCargado"
+						th:text="${detalle.producto.precioConIVA} + ' COP'"></span>
+				</div>
+			</div>
+			<hr style="background-color: black; margin-top: 30px;">
+			<div class="row">
+				<div class="col">
+					<span style="font-size: 32px;">Precio sin IVA:</span>
+				</div>
+				<div class="col">
+					<span style="font-size: 32px;" class="campoCargado"
+						th:text="${detalle.producto.precio} + ' COP'"></span>
+				</div>
+			</div>
+			<hr style="background-color: black; margin-top: 30px;">
+			<hr style="background-color: black; margin-bottom: 30px;">
+		</div>
+
+		<div class="row">
+			<div class="col" style="text-align: center;">
+				<span style="font-size: 32px; font-weight: lighter;" id="finalMsg">gE &copy; 2020 Todos los derechos
+					reservados.</span>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>

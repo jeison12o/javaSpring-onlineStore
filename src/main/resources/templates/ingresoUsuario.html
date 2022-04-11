@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Inicio</title>
+<div th:replace="fragment/linksHeader :: links"></div>
+<link rel="stylesheet" th:href="@{/css/ingresoUsuario.css}">
+<script th:src="@{/js/eliminarCuenta.js}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body style="overflow-x: hidden;">
+
+	<div id="divIngresoCliente" th:if="${usuario.rol.equals('Cliente')}">
+		<div class="form-group" th:replace="fragment/navBar :: nav"></div>
+
+		<div class="row" style="margin-top: 40px;">
+			<div class="col-sm" style="margin-left: 70px; width: 305px;">
+				<div th:replace="fragment/menu :: menu"></div>
+			</div>
+			<div class="col-sm">
+				<div th:replace="fragment/header :: photosHeader"></div>
+			</div>
+			<div class="col-sm"></div>
+		</div>
+		<h1 style="color: #e7dec8; text-decoration: none;"
+			id="tituloProductos">
+			Productos <i class="fas fa-box-open"></i>
+		</h1>
+
+		<div class="container" id="containerProductos">
+			<div th:if="${listaProductos.isEmpty()}">
+				<span style="font-size: 30px;">No se han encontrado
+					productos. :(</span>
+			</div>
+
+			<div th:if="${!listaProductos.isEmpty()}">
+				<a th:each="producto : ${listaProductos}"
+					th:href="@{'/detalleProducto/' + ${usuario.id} + '/' + ${producto.id}}"
+					class="card" id="anuncio">
+					<div>
+						<img id="imcargar" th:src="${producto.urlFoto}"
+							class="img-fluid rounded mt-2" style='width: 14rem;'>
+					</div>
+					<div class="card-body" id="cuerpoCard">
+						<h5 th:text="${producto.nombre}"></h5>
+						<hr style="background-color: white;">
+						<div class="row">
+							<div class="col">
+								<span>Precio: </span>
+							</div>
+							<div class="col">
+								<span th:text="'$ '+${producto.precio}"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<span>Con IVA: </span>
+							</div>
+							<div class="col">
+								<span th:text="'$ '+${producto.precioConIVA}"></span>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div id="paginacion" th:if="${!listaProductos.isEmpty()}">
+			<a th:each="i : ${#numbers.sequence(0,listaProductos.totalPages-1)}"
+				class="page-link btn btn-primary"
+				th:href="@{'/pag/' + ${usuario.id} + '/' + ${i}}" th:text="${i}"
+				id="pagElement" align="center"></a>
+		</div>
+	</div>
+
+
+
+
+
+	<div id="divIngresoVendedor" th:if="${usuario.rol.equals('Vendedor')}">
+		<div class="form-group" th:replace="fragment/vendedor/navBar :: nav"></div>
+
+		<div class="row" style="margin-top: 40px;">
+			<div class="col-sm" style="margin-left: 70px; width: 305px;">
+				<div th:replace="fragment/vendedor/menu :: menu"></div>
+			</div>
+			<div class="col-sm">
+				<div th:replace="fragment/header :: photosHeader"></div>
+			</div>
+			<div class="col-sm"></div>
+		</div>
+
+		<h1 style="color: #e7dec8; text-decoration: none;"
+			id="tituloProductos">
+			Productos <i class="fas fa-box-open"></i>
+		</h1>
+
+		<div class="container" id="containerProductos">
+			<div th:if="${listaProductos.isEmpty()}">
+				<span style="font-size: 30px;">No se han encontrado
+					productos. :(</span>
+			</div>
+
+			<div th:if="${!listaProductos.isEmpty()}">
+				<a th:each="producto : ${listaProductos}"
+					th:href="@{'/detalleProducto/' + ${usuario.id} + '/' + ${producto.id}}"
+					class="card" id="anuncio">
+					<div>
+						<img id="imcargar" th:src="${producto.urlFoto}"
+							class="img-fluid rounded mt-2" style='width: 14rem;'>
+					</div>
+					<div class="card-body" id="cuerpoCard">
+						<h4 th:text="${producto.nombre}"></h4>
+						<hr style="background-color: white;">
+						<div class="row">
+							<div class="col">
+								<span>Precio: </span>
+							</div>
+							<div class="col">
+								<span th:text="'$ '+${producto.precio}"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<span>Con IVA: </span>
+							</div>
+							<div class="col">
+								<span th:text="'$ '+${producto.precioConIVA}"></span>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div id="paginacion" th:if="${!listaProductos.isEmpty()}">
+			<a th:each="i : ${#numbers.sequence(0,listaProductos.totalPages-1)}"
+				class="page-link btn btn-primary"
+				th:href="@{'/pag/' + ${usuario.id} + '/' + ${i}}" th:text="${i}"
+				id="pagElement" align="center"></a>
+		</div>
+	</div>
+
+		<footer>
+			<div th:if="${listaProductos.isEmpty()}" style="height: 100px; backgroud-color: black;"></div>
+			<div th:replace="fragment/footer :: footer"></div>
+		</footer>
+</body>
+</html>

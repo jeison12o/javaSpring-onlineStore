@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Proyecto / editarBodega</title>
+<div th:replace="fragment/linksHeader :: links"></div>
+<link rel="stylesheet" th:href="@{/css/editarBodega.css}">
+</head>
+<body style="overflow-x: hidden;">
+
+	<div class="form-group" th:replace="fragment/vendedor/navBar :: nav"></div>
+
+	<div class="card" id="cardMain" style="width: 300px;">
+		<form action="#" th:action="@{/modificarBodega/{id}(id=${bodega.id})}"
+			th:object="${bodega}" method="post" style="margin-left: 33px;">
+			<table>
+				<tr>
+					<td colspan="2"><span id="titulo"
+						style="font-size: 26px; font-weight: bold;">Edici&oacute;n
+							de bodega</span>
+						<hr style="background-color: white;"></td>
+				</tr>
+				<tr>
+					<td><span id="nombre">Nombre:</span><input autofocus
+						placeholder="Nombre" th:field="*{nombre}" required="true"
+						type="text" class="form-control" /> <span
+						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+						class="text-danger"></span><span th:if="@{existeBodega(nombre)}"
+						th:text="${error}" class="text-danger"></span></td>
+				</tr>
+				<tr>
+					<td><span id="direccion">Direcci&oacute;n:</span><input
+						placeholder="Direcci&oacute;n" th:field="*{direccion}"
+						required="true" type="text" class="form-control" /><span
+						th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"
+						class="text-danger"></span></td>
+				</tr>
+				<tr>
+					<td><span id="capacidad">Capacidad:</span><input
+						placeholder="capacidad" th:field="*{capacidad}" required="true"
+						type="number" class="form-control" /><span
+						th:if="${#fields.hasErrors('capacidad')}" th:errors="*{capacidad}"
+						class="text-danger"></span></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: center;"><button
+							type="submit" class="btn btn-success"
+							style="margin-top: 20px; margin-bottom: 20px;">Guardar
+							cambios</button></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+</body>
+<footer style="margin-top: 120px;">
+	<div th:replace="fragment/footer :: footer"></div>
+</footer>
+</html>

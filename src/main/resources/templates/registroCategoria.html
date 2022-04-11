@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Proyecto / registroCategoria</title>
+<div th:replace="fragment/linksHeader :: links"></div>
+<link rel="stylesheet" th:href="@{/css/registroCategoria.css}" />
+</head>
+<body>
+
+	<div class="form-group" th:replace="fragment/vendedor/navBar :: nav"></div>
+
+	<table>
+		<tr>
+			<td><div class="card" style="padding: 20px;" id="divIzq">
+					<form action="#" th:object="${categoria}"
+						th:action="@{/guardarCategoria/{idVendedor}(idVendedor = ${idVendedor})}"
+						method="post">
+						<table align="center">
+							<thead id="theadDatos">
+								<tr>
+									<th colspan="2" id="columnaTitulo"><span id="titulo"
+										style="font-size: 25px; font-weight: bold;">Gesti&oacute;n
+											de categor&iacute;a</span>
+										<hr style="background-color: white;"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><div id="divisionInvisible1"></div></td>
+								</tr>
+								<tr id="filaDatos">
+									<td id="columnaDatosIzquierda"><span id="nombre"
+										class="mt-10">Nombre</span><input autofocus required="true"
+										type="text" placeholder="Nombre" th:field="*{nombre}"
+										id="campoNombre" class="form-control" /> <span
+										th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+										class="text-danger"></span> <span
+										th:if="@{existeCategoria(nombre)}" th:text="${error}"
+										class="text-danger"></span></td>
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align: center">
+										<button id="Guardar" type="submit" class="btn btn-success"
+											style="margin-top: 30px;">Guardar</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+				</div></td>
+
+			<td>
+				<div id="divDer">
+					<div class="card" style="width: 450px; text-align: center;">
+						<div th:if="${listaCategorias.isEmpty()}"
+							id="divisionNoHayCategorias">
+							<br> <span id="mensajeNoHayCategorias">No hay
+								categor&iacute;as registradas a&uacute;n. :(</span>
+						</div>
+						<div th:if="${!listaCategorias.isEmpty()}"
+							id="divisionSiHayCategorias">
+							<div class="card-top">
+								<h1>Registros</h1>
+							</div>
+							<div class="card-body">
+								<table align="center" style="width: 400px; text-align: center;"
+									class="table table-primary">
+									<thead>
+										<tr>
+											<th>Nombre</th>
+											<th>Editar</th>
+											<th>Eliminar</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="categoria : ${listaCategorias}" id="filaRegistro">
+											<td th:text="${categoria.nombre}" id="columnaNombre"></td>
+											<td id="columnaEditar"><a class="btn btn-info"
+												th:href="@{/editarCategoria/{id}(id=${categoria.id})}"
+												style="font-size: 25px; padding: 3px 10px; border-radius: 50%;">
+													<i class="fas fa-pencil-ruler"></i>
+											</a></td>
+											<td id="columnaEliminar"><a
+												th:href="@{/eliminarCategoria/{id}(id=${categoria.id})}"
+												class="btn btn-danger"
+												style="font-size: 25px; padding: 3px 10px; border-radius: 50%;"><i
+													class="fas fa-trash"></i></a></td>
+										</tr>
+									</tbody>
+								</table>
+								<div id="paginacion">
+									<a
+										th:each="i : ${#numbers.sequence(0,listaCategorias.totalPages-1)}"
+										class="page-link btn btn-primary"
+										th:href="@{'/registroCategoria/' + ${usuario.id} + '/pag/' + ${i}}"
+										th:text="${i}" id="pagElement" align="center"></a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</td>
+
+		</tr>
+	</table>
+
+</body>
+<footer style="margin-top: 250px;">
+	<div th:replace="fragment/footer :: footer"></div>
+</footer>
+</html>

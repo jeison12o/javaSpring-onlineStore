@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Carrito</title>
+<link rel="stylesheet" th:href="@{/css/carrito.css}">
+<div th:replace="fragment/linksHeader :: links"></div>
+</head>
+<body>
+
+	<div class="form-group" th:replace="fragment/navBar :: nav"></div>
+
+	<div id="compraRealizada" th:if="${compraRealizada == true}">
+		<div class="alert alert-success" role="alert">&iexcl;Compra
+			realizada!, puedes verificar esto en 'pedidos'.</div>
+	</div>
+	<div id="noHayProductos" th:if="${noHayProductos == true}">
+		<div class="alert alert-danger" role="alert">&iexcl;A&uacute;n
+			no hay productos en tu carrito!</div>
+	</div>
+	<div id="productoAgotado" th:if="${productoNoDisponible == true}">
+		<div class="alert alert-warning" role="alert" 
+		th:text="'El producto: ' + ${productoAgotado} + ' se agot&oacute; antes de realizar la compra. :('"></div>
+	</div>
+
+	<div class="containerx p-1 ml-4">
+		<div id="informacion">
+			<h1><i class="fas fa-shopping-cart"></i> Mi
+				carrito <br></h1> <span id="totalPago"
+				th:text="'Total a pagar: $ ' + ${valorTotal} + ' COP'"></span>
+		</div>
+		<div id="divBotonComprar">
+			<a class="btn btn-success"
+				th:href="@{'/realizarCompra/' + ${usuario.id} + '/productos'}">Realizar
+				compra</a>
+		</div>
+	</div>
+	
+	<hr style="background-color: white;">
+
+	<div class="containerxd">
+		<div id="divNoProductos" th:if="${listaProductos.isEmpty()}">
+			<span id="mensajeNoHayProductos">A&uacute;n no hay productos
+				en tu carrito. :(</span>
+		</div>
+		<div id="divProductos" th:if="${!listaProductos.isEmpty()}">
+			<div class="card" th:each="carrito : ${listaProductos}" id="producto">
+				<div>
+					<img id="imcargar" th:src="${carrito.producto.urlFoto}"
+						class="img-fluid rounded mt-2" style='width: 14rem;'>
+				</div>
+				<div class="card-body" id="cuerpoCard">
+					<h4 th:text="${carrito.producto.nombre}"></h4>
+					<hr style="background-color: white;">
+					<div class="row mb-2">
+						<div class="col">
+							<span class="newText">Precio:</span>
+						</div>
+						<div class="col">
+							<span class="newText" th:if="${carrito.producto.IVA}" th:text="'$ '+${carrito.producto.precioConIVA}"></span>
+							<span class="newText" th:if="${!carrito.producto.IVA}" th:text="'$ '+${carrito.producto.precio}"></span>
+						</div>
+					</div>
+					<a class="btn btn-danger mt-2"
+						th:href="@{'/eliminar/prod/' + ${carrito.id} + '/carrito/' + ${usuario.id}}">
+						<i class="fas fa-trash"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div style="height: 130px; backgroud-color: black;"></div>
+		<div th:replace="fragment/footer :: footer"></div>
+	</footer>
+
+</body>
+</html>

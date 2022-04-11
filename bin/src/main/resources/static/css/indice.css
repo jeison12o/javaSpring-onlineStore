@@ -1,0 +1,83 @@
+@charset "ISO-8859-1";
+
+img {
+	position: fixed;
+}
+
+table{
+	position: fixed;
+	margin-top: 180px;
+	margin-left: 570px;
+}
+
+td, tr{
+	height: 156px;
+	width: 146px;
+	text-align: center;
+}
+
+#division1{
+	height: 150px;
+	width: 140px;
+	background-color: #f0ece3;
+	opacity: 0.8;
+	border: 2px solid lightgray;
+	border-radius: 5px;
+}
+
+#division2{
+	height: 150px;
+	width: 140px;
+	background-color: #d3c09a;
+	opacity: 0.8;
+	border: 2px solid lightgray;
+	border-radius: 5px;
+}
+
+#division3{
+	height: 150px;
+	width: 140px;
+	background-color: #dfd3c3;
+	opacity: 0.8;
+	border: 2px solid lightgray;
+	border-radius: 5px;
+}
+
+#division4{
+	height: 150px;
+	width: 140px;
+	background-color: #c7b198;
+	opacity: 0.8;
+	border: 2px solid lightgray;
+	border-radius: 5px;
+}
+
+#division1, #division2, #division3, #division4 {
+	font-size: 20px;
+	font-family: cursive;
+	font-weight: lighter;
+} 
+
+#division1:hover{
+	height: 154px;
+	width: 144px;
+	filter:brightness(0.9);
+}
+
+#division2:hover{
+	height: 154px;
+	width: 144px;
+	filter:brightness(0.9);
+}
+
+#division3:hover{
+	height: 154px;
+	width: 144px;
+	filter:brightness(0.9);
+}
+
+#division4:hover{
+	height: 154px;
+	width: 144px;
+	filter:brightness(0.9);
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<div th:replace="fragment/linksHeader :: links"></div>
+<link rel="stylesheet" th:href="@{/css/editarCategoria.css}" />
+</head>
+<body style="overflow-x: hidden;">
+
+	<div class="form-group" th:replace="fragment/vendedor/navBar :: nav"></div>
+
+	<div id="divisionPrincipal" align="center">
+		<div class="card" style="width: 400px; margin-top: 120px;">
+			<form action="#"
+				th:action=@{/modificarCategoria/{id}(id=${categoria.id})}
+				th:object="${categoria}" method="post">
+				<table align="center">
+					<thead>
+						<tr>
+							<th colspan="2" style="font-size: 25px; font-weight: bold;">Edici&oacute;n
+								de categor&iacute;a
+								<hr style="background-color: white;">
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><div id="divisionInvisible"></div></td>
+						</tr>
+						<tr>
+							<td><span id="nombre">Nombre</span><input autofocus
+								type="text" th:field="*{nombre}" required="true"
+								placeholder="Nuevo nombre" class="form-control" /><span
+								th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+								class="text-danger"></span> <span
+								 th:text="${error}"
+								class="text-danger"></span></td>
+						</tr>
+						<tr>
+							<td colspan="2" style="text-align: center;">
+								<button id="boton" type="submit" class="btn btn-success"
+									style="margin-top: 20px; margin-bottom: 30px;">Guardar
+									cambios</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</div>
+</body>
+<footer style="margin-top: 240px;">
+	<div th:replace="fragment/footer :: footer"></div>
+</footer>
+</html>

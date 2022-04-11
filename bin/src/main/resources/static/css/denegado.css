@@ -1,0 +1,23 @@
+body{
+	/*background: linear-gradient(to bottom, #fcdab7, #1e5f74 , #133b5c, #1d2d50, black);*/
+	background: url('../images/fondos/darkWallBiggest.png');
+	overflow-x: hidden;
+}
+
+.container{
+	display: flex;
+	margin:auto;
+	
+	flex-direction: row;
+	flex-wrap:wrap;
+	
+	justify-content: center;
+    align-items: center;
+}
+
+.jumbotron{
+	margin-top: 150px;
+	vertical-align: center;
+	width: 80%;
+	height: auto;
+}

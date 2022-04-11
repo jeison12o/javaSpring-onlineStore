@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<div th:replace="fragment/linksHeader :: links"></div>
+</head>
+<body>
+	<div th:fragment="nav">
+		<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+		<nav style="width: 1366px" class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<a class="navbar-brand" href="#"><img  src="/images/iconos/ge.png" style="height: 32px; width: 32px;"></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarColor01" aria-controls="navbarColor01"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarColor01">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a class="nav-link" th:href="@{/inicio/{idUsuario}(idUsuario = ${usuario.id})}">Inicio
+							<span class="sr-only">(current)</span>
+					</a>
+					<li class="nav-item"><a class="nav-link" th:href="@{/registroProducto/{idVendedor}(idVendedor = ${usuario.id})}">Productos</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/registroProveedor/{idVendedor}(idVendedor = ${usuario.id})}">Proveedores</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/registroBodega/{idVendedor}(idVendedor = ${usuario.id})}">Bodegas</a></li>
+					<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+						role="button" aria-haspopup="true" aria-expanded="false">Categor&iacute;as</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" th:href="@{/registroCategoria/{idVendedor}(idVendedor = ${usuario.id})}">Gestion de categor&iacute;as</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" th:href="@{/registroSubcategoria/{idVendedor}(idVendedor = ${usuario.id})}">Gesti&oacute;n de subcategor&iacute;as</a>
+						</div></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+						role="button" aria-haspopup="true" aria-expanded="false">Cuenta</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" th:href="@{/editarPerfil/{idUsuario}(idUsuario = ${usuario.id})}">Editar perfil</a>
+							<div class="dropdown-divider"></div>
+							<form th:action='@{/logout?logout=true}' method="post">
+          						<button type="submit" class="dropdown-item">Cerrar sesi&oacute;n</button>
+          					</form>
+						</div>
+					</li>
+				</ul>
+				<form class="form-inline my-2 my-lg-0" th:action="@{/busquedaPorPalabras/{idUsuario}(idUsuario = ${usuario.id})}" th:object="${producto}">
+					<input class="form-control mr-sm-2" type="text" 
+						placeholder="B&uacute;squeda" th:field="*{descripcion}">
+					<button class="btn btn-info my-2 my-sm-0" type="submit" style="margin-right: 10px;">Buscar</button>
+				</form>
+			</div>
+		</nav>
+
+	</div>
+</body>
+</html>

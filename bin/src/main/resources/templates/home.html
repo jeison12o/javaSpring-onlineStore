@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Inicio</title>
+<div th:replace="fragment/linksHeader :: links"></div>
+<link rel="stylesheet" th:href="@{/css/ingresoUsuario.css}">
+<script th:src="@{/js/eliminarCuenta.js}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body style="overflow-x: hidden;">
+
+	<div id="divIngresoCliente" >
+		<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<div th:replace="fragment/linksHeader :: links"></div>
+</head>
+<body>
+	<script th:src="@{/js/eliminarCuenta.js}"></script>
+	<div th:fragment="nav">
+		<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+		<nav style="width: 1360px"
+			class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<a class="navbar-brand" href="/login">Inicia sesion +</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarColor01" aria-controls="navbarColor01"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarColor01">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a class="nav-link" href="/login">Inicio
+							<span class="sr-only">(current)</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="/login">Mis
+							pedidos</a></li>
+					<li class="nav-item"><a class="nav-link" href="/login"> <i class="fas fa-shopping-cart"></i> Carrito </a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="/login">Mis
+							Facturas</a></li>
+					
+					<li class="nav-item"><a class="nav-link" href="/soporte">Soporte</a></li>
+				</ul>
+				<form class="form-inline my-2 my-lg-0"
+					th:action="@{/busquedaPorPalabras}"
+					th:object="${producto}">
+					<input class="form-control mr-sm-2" type="text"
+						placeholder="B&uacute;squeda" th:field="*{descripcion}">
+					<button class="btn btn-info my-2 my-sm-0" type="submit">Buscar</button>
+				</form>
+			</div>
+		</nav>
+	</div>
+</body>
+</html>
+
+		<div class="row" style="margin-top: 40px;">
+			<div class="col-sm" style="margin-left: 70px; width: 305px;">
+				<div th:replace="fragment/menu :: menu"></div>
+			</div>
+			<div class="col-sm">
+				<div th:replace="fragment/header :: photosHeader"></div>
+			</div>
+			<div class="col-sm"></div>
+		</div>
+		<h1 style="color: #e7dec8; text-decoration: none;"
+			id="tituloProductos">
+			Productos <i class="fas fa-box-open"></i>
+		</h1>
+
+		<div class="container" id="containerProductos">
+			<div th:if="${listaProductos.isEmpty()}">
+				<span style="font-size: 30px;">No se han encontrado
+					productos. :(</span>
+			</div>
+
+			<div th:if="${!listaProductos.isEmpty()}">
+				<a th:each="producto : ${listaProductos}"
+										th:href="@{'/detalleProducto/'+ ${producto.id}}"
+					class="card" id="anuncio">
+					<div>
+						<img id="imcargar" th:src="${producto.urlFoto}"
+							class="img-fluid rounded mt-2" style='width: 14rem;'>
+					</div>
+					<div class="card-body" id="cuerpoCard">
+						<h4 th:text="${producto.nombre}"></h4>
+						<h5 th:text="'$ '+${producto.precio}"></h5>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div id="paginacion" th:if="${!listaProductos.isEmpty()}">
+			<a th:each="i : ${#numbers.sequence(0,listaProductos.totalPages-1)}"
+				class="page-link btn btn-primary"
+				th:href="@{'/pag/' + ${i}}" th:text="${i}"
+				id="pagElement" align="center"></a>
+		</div>
+	</div>
+
+
+
+		<footer>
+			<div th:if="${listaProductos.isEmpty()}" style="height: 100px; backgroud-color: black;"></div>
+			<div th:replace="fragment/footer :: footer"></div>
+		</footer>
+</body>
+</html>

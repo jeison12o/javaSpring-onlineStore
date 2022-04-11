@@ -1,0 +1,10 @@
+body{
+	/*background: linear-gradient(to bottom, #fcdab7, #1e5f74 , #133b5c, #1d2d50, black);*/
+	background: url('../images/fondos/fondoDark.jpg');
+	overflow-x: hidden;
+}
+
+#cardPrincipal{
+	margin-top: 100px;
+}
+
